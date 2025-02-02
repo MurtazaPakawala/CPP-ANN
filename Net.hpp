@@ -8,10 +8,10 @@
 typedef std::vector<Neuron> Layers;
 class Net {
     public:
-    Net(const std::vector<unsigned> &topology);
-    void feedForward(const std::vector<double> &inputVal);
-    void backProp(const std::vector<double> &outputVal);
-    void getResult(std::vector<double> resval) const;
+    Net(const std::vector<unsigned>& topology);
+    void feedForward(const std::vector<double> & inputVal);
+    void backProp(const std::vector<double>& outputVal);
+    void getResult(std::vector<double>& resVal) const;
 
 
     private:

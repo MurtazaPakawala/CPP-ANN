@@ -1,6 +1,6 @@
 #include <Net.hpp>
 #include <vector>
-
+#include <iostream>
 
 
 Net::Net(const std::vector<unsigned> &topology) {
@@ -15,6 +15,18 @@ Net::Net(const std::vector<unsigned> &topology) {
 
         for (unsigned neuron = 0; neuron < total_neurons; neuron++) {
             nn_graph.back().push_back(Neuron());
+            std::cout << "hey! created a neuron\n";
         }
     }
+}
+void Net::feedForward(const std::vector<double>& input) {
+    // todo
+}
+
+void Net::backProp(const std::vector<double>& target) {
+    // todo
+}
+
+void Net::getResult(std::vector<double>& result) const {
+    // todo
 }

@@ -10,7 +10,7 @@ int main() {
 
 
     // Net we just have to mention the layers number of the neural net 
-    std::vector<unsigned> topology;
+    std::vector<unsigned> topology = {2, 3, 2};
     Net myNet = Net(topology);
 
     // input values is just a array [double]
