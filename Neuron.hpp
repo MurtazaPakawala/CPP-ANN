@@ -3,7 +3,8 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
-
+class Neuron;
+typedef std::vector<Neuron> Layer;
 struct Connection {
     double weight;
     double deltaWeight;
@@ -11,11 +12,12 @@ struct Connection {
 };
 class Neuron {
 public:
-    Neuron(unsigned numOutputs);
+    Neuron(unsigned numOutputs, int my_index);
 
     // just for printing 
     void setOutputVal(double outputVal);
     double getOutputVal() const;
+    void calcSum(const Layer &prevLayer);
     friend std::ostream& operator<<(std::ostream& os, const Neuron &neuron);
 
 private:
@@ -25,5 +27,6 @@ private:
 
     double m_outputVal;
     std::vector<Connection> neuron_connections;
+    int my_index;
 };
 #endif

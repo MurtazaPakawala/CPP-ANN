@@ -5,7 +5,7 @@
 #include <vector>
 
 
-typedef std::vector<Neuron> Layers;
+typedef std::vector<Neuron> Layer;
 class Net {
     public:
     Net(const std::vector<unsigned>& topology);
@@ -15,7 +15,7 @@ class Net {
 
 
     private:
-    std::vector<Layers> nn_graph;
+    std::vector<Layer> nn_graph;
 
 };
 #endif 

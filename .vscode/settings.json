@@ -67,6 +67,7 @@
         "utility": "cpp",
         "format": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "__split_buffer": "cpp"
     }
 }
