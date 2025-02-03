@@ -2,6 +2,7 @@
 #define NEURON_HPP
 #include <vector>
 #include <cstdlib>
+#include <iostream>
 
 struct Connection {
     double weight;
@@ -11,6 +12,9 @@ struct Connection {
 class Neuron {
 public:
     Neuron(unsigned numOutputs);
+
+    // just for printing 
+    friend std::ostream& operator<<(std::ostream& os, const Neuron &neuron);
 
 private:
     static double randomWeight() {

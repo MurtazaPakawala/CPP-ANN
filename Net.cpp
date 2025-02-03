@@ -28,6 +28,8 @@ void Net::feedForward(const std::vector<double>& input) {
     // going through all the neurons and setting the input values 
     for (unsigned i = 0; i < input.size(); i++) {
         nn_graph[0][i] = input[i];
+        std::cout << nn_graph[0][i] << "\n";
+        // just checking this is correct or not 
     }
 }
 
