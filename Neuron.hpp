@@ -14,6 +14,8 @@ public:
     Neuron(unsigned numOutputs);
 
     // just for printing 
+    void setOutputVal(double outputVal);
+    double getOutputVal() const;
     friend std::ostream& operator<<(std::ostream& os, const Neuron &neuron);
 
 private:

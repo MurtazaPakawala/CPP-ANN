@@ -9,7 +9,13 @@ Neuron::Neuron(unsigned numOutputs) {
     }
 }
 
+void Neuron::setOutputVal(double outputVal) {
+    m_outputVal = outputVal;
+}
 
+double Neuron::getOutputVal() const {
+    return m_outputVal;
+}
 std::ostream& operator<<(std::ostream& os, const Neuron& neuron) {
     os << "Neuron Output Value: " << neuron.m_outputVal << "\nConnections:\n";
     for (const auto& conn : neuron.neuron_connections) {
