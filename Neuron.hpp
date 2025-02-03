@@ -9,17 +9,15 @@ struct Connection {
 
 };
 class Neuron {
-
-    public:
+public:
     Neuron(unsigned numOutputs);
 
-    private:
+private:
     static double randomWeight() {
-        return rand()/double(RAND_MAX);
+        return rand() / double(RAND_MAX);
     }
+
     double m_outputVal;
     std::vector<Connection> neuron_connections;
-
 };
-
 #endif

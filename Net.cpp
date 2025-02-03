@@ -1,5 +1,6 @@
 #include <Net.hpp>
 #include <vector>
+#include <cassert>
 #include <iostream>
 
 
@@ -21,6 +22,13 @@ Net::Net(const std::vector<unsigned> &topology) {
 }
 void Net::feedForward(const std::vector<double>& input) {
     // todo
+    // making sure that the input size matches to the network input layer size 
+    assert(input.size() == nn_graph[0].size() - 1);
+
+    // going through all the neurons and setting the input values 
+    for (unsigned i = 0; i < input.size(); i++) {
+        nn_graph[0][i] = input[i];
+    }
 }
 
 void Net::backProp(const std::vector<double>& target) {

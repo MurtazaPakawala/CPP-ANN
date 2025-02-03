@@ -14,13 +14,13 @@ int main() {
     Net myNet = Net(topology);
 
     // input values is just a array [double]
-    std::vector<double> inputVal;
-    std::vector<double> outputVal;
-    std::vector<double> resultVal;
+    // std::vector<double> inputVal;
+    // std::vector<double> outputVal;
+    // std::vector<double> resultVal;
 
 
-    myNet.feedForward(inputVal);
-    myNet.backProp(outputVal);
-    myNet.getResult(resultVal);
+    // myNet.feedForward(inputVal);
+    // myNet.backProp(outputVal);
+    // myNet.getResult(resultVal);
     return 0;
 }
