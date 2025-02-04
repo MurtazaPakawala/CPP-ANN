@@ -48,3 +48,22 @@ void Neuron::calcSum(const Layer& prevLayer) {
 }
 
 
+void Neuron::calcOutputGrad(double target) {
+    double delta = m_outputVal - target;
+    m_gradient = delta * (activationFunctionDerivative(m_outputVal));
+}
+double Neuron::sumDow(const Layer& next_layer) const {
+    double sum = 0;
+    for (unsigned n = 0; n < next_layer.size() - 1; n++) {
+        sum += neuron_connections[n].weight * next_layer[n].m_gradient;
+    }
+    return sum;
+}
+
+void Neuron::calcHiddenLayerGrad(const Layer& next_layer) {
+    double dow = sumDow(next_layer);
+    m_gradient = dow * activationFunctionDerivative(m_outputVal);
+}
+
+
+

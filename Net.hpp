@@ -5,7 +5,6 @@
 #include <vector>
 
 
-typedef std::vector<Neuron> Layer;
 class Net {
     public:
     Net(const std::vector<unsigned>& topology);
@@ -13,9 +12,10 @@ class Net {
     void backProp(const std::vector<double>& outputVal);
     void getResult(std::vector<double>& resVal) const;
 
-
     private:
     std::vector<Layer> nn_graph;
+    // error rmse 
+    double m_error;
 
 };
 #endif 
