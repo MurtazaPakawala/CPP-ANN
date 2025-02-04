@@ -16,7 +16,6 @@ Net::Net(const std::vector<unsigned> &topology) {
         unsigned numOutpus = curr_layer == num_layers - 1 ? 0 : topology[curr_layer + 1];
         for (unsigned neuron = 0; neuron < total_neurons; neuron++) {
             nn_graph.back().push_back(Neuron(numOutpus, neuron));
-            std::cout << "hey! created a neuron\n";
         }
     }
 }
@@ -44,6 +43,41 @@ void Net::backProp(const std::vector<double>& target) {
         // makign the assert stament about the last layer 
         // still we kepts the bias in the last layer for now
         assert(target.size() == nn_graph.back().size() - 1);
+        // step 1 calculate the error
+        auto outputLayer = nn_graph.back();
+        m_error = 0;
+        for (unsigned n = 0; n < outputLayer.size() - 1; n++) {
+            double delta = target[n] - outputLayer[n].getOutputVal();
+            m_error += delta * delta;
+        }
+        // taking the mean of the error and sqrt
+        m_error /= (outputLayer.size() - 1);
+        m_error = sqrt(m_error);
+
+        // step 2 calculate gradient for the output layer
+        for (unsigned n = 0; n < outputLayer.size() - 1; n++) {
+            outputLayer[n].calculateGradient(target[n]);
+        }
+
+        // step 3 calculate gradient for all hidden layer
+        for (unsigned layer_num = outputLayer.size() - 2; layer_num > 0; layer_num--) {
+            auto &hidden_layer = nn_graph[layer_num];
+            auto &next_layer = nn_graph[layer_num + 1];
+
+            for (unsigned n = 0; n < hidden_layer.size(); n++) {
+                hidden_layer[n].calcHiddenLayerGrad(next_layer);
+            }
+
+        }
+
+        // step 4 updating all weights 
+        for (unsigned layer_num = outputLayer.size() - 1; layer_num > 0; layer_num--) {
+            auto &curr_layer = nn_graph[layer_num];
+            auto &prev_layer = nn_graph[layer_num-1];
+            for (unsigned n = 0; n < curr_layer.size() - 1; n++) {
+                curr_layer[n].updateWeight(prev_layer);
+            }
+        }
 }
 
 void Net::getResult(std::vector<double>& result) const {
