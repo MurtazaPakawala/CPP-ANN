@@ -2,6 +2,7 @@
 #include <vector>
 #include <cassert>
 #include <iostream>
+#include <cmath>
 
 
 Net::Net(const std::vector<unsigned> &topology) {
@@ -18,6 +19,8 @@ Net::Net(const std::vector<unsigned> &topology) {
             nn_graph.back().push_back(Neuron(numOutpus, neuron));
         }
     }
+    // putting the bias value as one
+    nn_graph.back().back().setOutputVal(1.0);
 }
 void Net::feedForward(const std::vector<double>& input) {
     // todo
@@ -56,7 +59,7 @@ void Net::backProp(const std::vector<double>& target) {
 
         // step 2 calculate gradient for the output layer
         for (unsigned n = 0; n < outputLayer.size() - 1; n++) {
-            outputLayer[n].calculateGradient(target[n]);
+            outputLayer[n].calcOutputGrad(target[n]);
         }
 
         // step 3 calculate gradient for all hidden layer
@@ -81,5 +84,9 @@ void Net::backProp(const std::vector<double>& target) {
 }
 
 void Net::getResult(std::vector<double>& result) const {
-    // todo
+    result.clear();
+    auto& output_layer = nn_graph.back();
+    for (unsigned n = 0; n < output_layer.size() - 1; n++) {
+        result.push_back(output_layer[n].getOutputVal());
+    }
 }
