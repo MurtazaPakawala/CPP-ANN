@@ -20,7 +20,7 @@ public:
     void calcSum(const Layer &prevLayer);
     void calcOutputGrad(double target);
     void calcHiddenLayerGrad(const Layer& next_layer);
-    void updateWeight(Layer& next_layer);
+    void updateWeight(Layer& prev_layer);
     double sumDow(const Layer &next_layer) const;
     friend std::ostream& operator<<(std::ostream& os, const Neuron &neuron);
 
@@ -36,6 +36,10 @@ private:
     std::vector<Connection> neuron_connections;
     int my_index;
     double m_gradient;
+
+    // learning params
+    static double eta;
+    static double alpha;
 
 };
 

@@ -2,6 +2,11 @@
 #include <iostream>
 #include <cmath>
 
+
+// leaning params 
+double Neuron::eta = 0.15;
+double Neuron::alpha = 0.5;
+
 Neuron::Neuron(unsigned numOutputs, int index_val) {
     for (unsigned c = 0; c < numOutputs; c++) {
         // Create a connection with a random weight
@@ -65,5 +70,19 @@ void Neuron::calcHiddenLayerGrad(const Layer& next_layer) {
     m_gradient = dow * activationFunctionDerivative(m_outputVal);
 }
 
+
+
+void Neuron::updateWeight(Layer &prev_layer) {
+    for (unsigned n = 0; n < prev_layer.size(); n++) {
+        Neuron &neuron = prev_layer[n];
+        double oldDeltaWeight = neuron.neuron_connections[my_index].deltaWeight;
+
+
+        // updating the new delta weight using momentum
+        double newDelataWeight = eta * neuron.getOutputVal() * m_gradient + alpha * oldDeltaWeight;
+        neuron.neuron_connections[my_index].deltaWeight = newDelataWeight;
+        neuron.neuron_connections[my_index].weight += newDelataWeight;
+    }
+}
 
 
