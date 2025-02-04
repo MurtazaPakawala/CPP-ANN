@@ -50,6 +50,7 @@ void Neuron::calcSum(const Layer& prevLayer) {
         sum+= prevLayer[n].getOutputVal() * prevLayer[n].neuron_connections[my_index].weight;
     }
     // todo apply the activation and store the value 
+    m_outputVal = activationFunction(sum);
 }
 
 

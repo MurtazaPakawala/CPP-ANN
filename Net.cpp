@@ -17,6 +17,7 @@ Net::Net(const std::vector<unsigned> &topology) {
         unsigned numOutpus = curr_layer == num_layers - 1 ? 0 : topology[curr_layer + 1];
         for (unsigned neuron = 0; neuron < total_neurons; neuron++) {
             nn_graph.back().push_back(Neuron(numOutpus, neuron));
+            std::cout << "Created a neuron \n";
         }
     }
     // putting the bias value as one
