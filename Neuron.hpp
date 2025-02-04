@@ -21,6 +21,9 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Neuron &neuron);
 
 private:
+    // making the activation function
+    static double activationFunction(double x);
+    static double activationFunctionDerivative(double x);
     static double randomWeight() {
         return rand() / double(RAND_MAX);
     }

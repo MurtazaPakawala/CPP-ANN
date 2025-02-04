@@ -1,13 +1,15 @@
 #include <Neuron.hpp>
 #include <iostream>
+#include <cmath>
 
-Neuron::Neuron(unsigned numOutputs, int my_index) {
+Neuron::Neuron(unsigned numOutputs, int index_val) {
     for (unsigned c = 0; c < numOutputs; c++) {
         // Create a connection with a random weight
         neuron_connections.push_back(Connection());
         neuron_connections.back().weight = randomWeight();
     }
-    my_index = my_index;
+    std::cout << index_val << "< this is the index value of the neuron\n";
+    my_index = index_val;
 }
 
 void Neuron::setOutputVal(double outputVal) {
@@ -25,10 +27,28 @@ std::ostream& operator<<(std::ostream& os, const Neuron& neuron) {
     return os;
 }
 
+
+// activation function 
+
+double Neuron::activationFunction(double val) {
+    return tanh(val);
+}
+
+double Neuron::activationFunctionDerivative(double tanh_val) {
+    return 1 - tanh_val * tanh_val;
+}
+
+
 void Neuron::calcSum(const Layer& prevLayer) {
+    std::cout << "came\n";
     double sum = 0;
     // we also include the bias neuron
     for (unsigned n = 0; n < prevLayer.size(); n++) {
+        std::cout << n << " " << my_index<< "\n";
         sum+= prevLayer[n].getOutputVal() * prevLayer[n].neuron_connections[my_index].weight;
     }
+    std::cout << "calculation done\n";
+    // todo apply the activation and store the value 
 }
+
+

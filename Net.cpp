@@ -41,7 +41,9 @@ void Net::feedForward(const std::vector<double>& input) {
 }
 
 void Net::backProp(const std::vector<double>& target) {
-    // todo
+        // makign the assert stament about the last layer 
+        // still we kepts the bias in the last layer for now
+        assert(target.size() == nn_graph.back().size() - 1);
 }
 
 void Net::getResult(std::vector<double>& result) const {
